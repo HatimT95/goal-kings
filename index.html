@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Goal Kings | Top 100 Goalscorers in Football History</title>
+  <meta name="description" content="Live tracker of Cristiano Ronaldo's race to 1,000 career goals plus a searchable database of the top 100 goalscorers in football history.">
+  <meta name="theme-color" content="#07090f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="The Goal Kings home">
+      <span class="brand-ball" aria-hidden="true">⚽</span>
+      <span class="brand-text">THE GOAL <b>KINGS</b></span>
+    </a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#tracker">Tracker</a>
+      <a href="#players">Top 100</a>
+      <a href="#about">About the data</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO / TRACKER -->
+    <section class="hero" id="tracker" aria-labelledby="hero-title">
+      <div class="hero-copy fade-in">
+        <p class="eyebrow">Football's greatest chase</p>
+        <h1 id="hero-title">The Goal <span class="gold-text">Kings</span></h1>
+        <p class="lede">Top 100 goalscorers in football history, and the live race to <strong>1,000 career goals</strong>.</p>
+        <div class="hero-stats" id="heroStats" aria-live="polite"></div>
+      </div>
+
+      <div class="tracker-card fade-in" id="trackerCard">
+        <div class="legend-tabs" id="legendTabs" role="tablist" aria-label="Choose an active legend"></div>
+
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 220 220" role="img" aria-labelledby="ringLabel">
+            <title id="ringLabel">Progress toward 1,000 career goals</title>
+            <defs>
+              <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#fff2b3"/>
+                <stop offset="50%" stop-color="#f7c948"/>
+                <stop offset="100%" stop-color="#d9962b"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-track" cx="110" cy="110" r="94"/>
+            <circle class="ring-ticks" cx="110" cy="110" r="104"/>
+            <circle class="ring-bar" id="ringBar" cx="110" cy="110" r="94" transform="rotate(-90 110 110)"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-number" id="ringNumber">0</div>
+            <div class="ring-sub">career goals</div>
+            <div class="ring-pct" id="ringPct">0%</div>
+          </div>
+        </div>
+
+        <div class="tracker-name" id="trackerName">Loading…</div>
+
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="count-box"><span class="count-num" id="cdRemaining">–</span><span class="count-lbl">goals to go</span></div>
+          <div class="count-box"><span class="count-num" id="cdMatches">–</span><span class="count-lbl">matches at career pace</span></div>
+          <div class="count-box"><span class="count-num" id="cdDate">–</span><span class="count-lbl">projected date</span></div>
+        </div>
+
+        <div class="progress" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-milestones"><span>0</span><span>250</span><span>500</span><span>750</span><span>1,000</span></div>
+        </div>
+
+        <p class="tracker-foot" id="trackerFoot"></p>
+      </div>
+    </section>
+
+    <!-- DATABASE -->
+    <section class="database" id="players" aria-labelledby="db-title">
+      <div class="section-head">
+        <h2 id="db-title">The Top 100</h2>
+        <p class="section-sub">Click any player for the full career breakdown.</p>
+      </div>
+
+      <div class="toolbar" role="search">
+        <label class="search">
+          <span class="sr-only">Search players</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search by name or nationality…" autocomplete="off">
+        </label>
+
+        <div class="chips" id="statusChips" role="group" aria-label="Filter by status">
+          <button class="chip is-on" data-status="all" type="button">All</button>
+          <button class="chip" data-status="Active" type="button">Active</button>
+          <button class="chip" data-status="Retired" type="button">Retired</button>
+        </div>
+
+        <div class="chips" id="rangeChips" role="group" aria-label="Filter by rank">
+          <button class="chip is-on" data-range="100" type="button">Top 100</button>
+          <button class="chip" data-range="25" type="button">Top 25</button>
+          <button class="chip" data-range="10" type="button">Top 10</button>
+        </div>
+
+        <label class="select">
+          <span class="sr-only">Sort by</span>
+          <select id="sort">
+            <option value="rank">Sort: Rank</option>
+            <option value="goals">Sort: Goals</option>
+            <option value="name">Sort: Name A–Z</option>
+            <option value="assists">Sort: Assists</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <p>No players match your filters.</p>
+        <button class="btn" id="resetFilters" type="button">Reset filters</button>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About the data</h2>
+      <p id="disclaimer" class="disclaimer"></p>
+      <p class="data-asof" id="dataAsOf"></p>
+      <ul class="sources" id="sources"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>The Goal Kings · Static site powered by <code>players.json</code> · <span id="lastUpdated"></span></p>
+  </footer>
+
+  <!-- PLAYER MODAL -->
+  <dialog class="modal" id="modal" aria-labelledby="mName">
+    <div class="modal-panel" id="modalPanel">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close player details">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <noscript><p class="noscript">This site needs JavaScript to load the player database.</p></noscript>
+  <script src="app.js"></script>
+</body>
+</html>
